@@ -7,6 +7,8 @@ class ViewController: UIViewController, UIScrollViewDelegate
     @IBOutlet weak var destImage: UIImageView!
     @IBOutlet weak var srcImageView: UIImageView!
     
+    var bgQueue: dispatch_queue_t?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -19,6 +21,8 @@ class ViewController: UIViewController, UIScrollViewDelegate
         scrollView.delegate = self
         scrollView.maximumZoomScale = 1.0
         scrollView.minimumZoomScale = 0.1
+        
+        bgQueue = dispatch_queue_create("BackgroundImageCreation", DISPATCH_QUEUE_SERIAL)
     }
     
     override func didReceiveMemoryWarning()
@@ -29,7 +33,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
 
     @IBAction func chop(sender: AnyObject)
     {
-        drawTop()
+        drawTop(scrollView.contentOffset)
     }
 
     @IBAction func reset(sender: AnyObject)
@@ -48,13 +52,15 @@ class ViewController: UIViewController, UIScrollViewDelegate
     
     func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat)
     {
-        drawTop()
+    }
+
+    func scrollViewDidScroll(scrollView: UIScrollView)
+    {
+        dispatch_async(bgQueue!, { self.drawTop(scrollView.contentOffset) })
     }
     
-    func drawTop()
+    func drawTop(imageOffset: CGPoint)
     {
-        let imageOffset = scrollView.contentOffset
-        
         let cgImage = srcImageView.image?.CGImage
         
         let topImage = CGImageCreateWithImageInRect(cgImage, CGRect(x: 0, y: 0, width: CGImageGetWidth(cgImage), height: Int(imageOffset.y)))
@@ -75,7 +81,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
         
         UIGraphicsEndImageContext()
         
-        destImage.image = finalImage
+        dispatch_async(dispatch_get_main_queue(), { self.destImage.image = finalImage })
     }
 }
 
