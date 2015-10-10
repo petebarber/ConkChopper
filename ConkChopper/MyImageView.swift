@@ -26,7 +26,8 @@ class MyImageView : UIView
             return
         }
         
-        image.drawInRect(rect)
+        print("scale:\(image.scale)")
+        image.drawAtPoint(CGPoint.zero)
     }
     
     func make(size: CGSize)

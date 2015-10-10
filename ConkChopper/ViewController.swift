@@ -1,10 +1,11 @@
 import UIKit
 
-class ViewController: UIViewController
+class ViewController: UIViewController, UIScrollViewDelegate
 {
-    @IBOutlet weak var srcImage: MyImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
 
     @IBOutlet weak var destImage: UIImageView!
+    @IBOutlet weak var srcImageView: UIImageView!
     
     override func viewDidLoad()
     {
@@ -15,6 +16,9 @@ class ViewController: UIViewController
         //destImage.layer.borderWidth = 5.0
         //self.clipsToBounds = true
         
+        scrollView.delegate = self
+        scrollView.maximumZoomScale = 1.0
+        scrollView.minimumZoomScale = 0.1
     }
     
     override func didReceiveMemoryWarning()
@@ -25,21 +29,53 @@ class ViewController: UIViewController
 
     @IBAction func chop(sender: AnyObject)
     {
-        print("pre - dest:\(destImage)")
-        
-        srcImage.make(destImage.frame.size)
-        
-        destImage.image = srcImage.renderedImage
-        //destImage.image = srcImage.image
-        
-        print("ren:\(srcImage.renderedImage)")
-        print("src:\(srcImage.image)")
-        print("dest:\(destImage)")
+        drawTop()
     }
 
     @IBAction func reset(sender: AnyObject)
     {
         destImage.image = nil
+    }
+    
+    //
+    // UIScrollViewDelegate
+    //
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView?
+    {
+        //print("Num of SV:\(scrollView.subviews.count)")
+        return srcImageView
+    }
+    
+    func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat)
+    {
+        drawTop()
+    }
+    
+    func drawTop()
+    {
+        let imageOffset = scrollView.contentOffset
+        
+        let cgImage = srcImageView.image?.CGImage
+        
+        let topImage = CGImageCreateWithImageInRect(cgImage, CGRect(x: 0, y: 0, width: CGImageGetWidth(cgImage), height: Int(imageOffset.y)))
+        
+        let topLeftOfBottomPart = CGPoint(x: 0, y: imageOffset.y + scrollView.bounds.size.height)
+        let sizeOfBottomPart = CGSize(width: CGImageGetWidth(cgImage), height: CGImageGetHeight(cgImage) - Int(topLeftOfBottomPart.y))
+        
+        let bottomImage = CGImageCreateWithImageInRect(cgImage, CGRect(origin: topLeftOfBottomPart, size: sizeOfBottomPart))
+        
+        let finalSize = CGSize(width: CGImageGetWidth(cgImage), height: CGImageGetHeight(topImage) + CGImageGetHeight(bottomImage))
+        
+        UIGraphicsBeginImageContext(finalSize)
+        
+        UIImage(CGImage: topImage!).drawAtPoint(CGPoint.zero)
+        UIImage(CGImage: bottomImage!).drawAtPoint(CGPoint(x: 0, y: CGImageGetHeight(topImage!)))
+        
+        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        destImage.image = finalImage
     }
 }
 
