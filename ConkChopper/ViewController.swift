@@ -25,9 +25,11 @@ class ViewController: UIViewController, UIScrollViewDelegate
         destImage.layer.borderWidth = 5.0
     }
     
-    func drawTop(var imageOffset: CGPoint)
+    func drawTop(var imageOffset: CGPoint, zoomScale: CGFloat)
     {
-        guard let cgImage = srcImageView.image?.CGImage, finalImageWidth = srcImageView.image?.size.width else
+        print("scale:\(zoomScale), offset:\(imageOffset)")
+        
+        guard let fullSrcImage = srcImageView.image?.CGImage, finalImageWidth = srcImageView.image?.size.width else
         {
             return
         }
@@ -35,16 +37,19 @@ class ViewController: UIViewController, UIScrollViewDelegate
         imageOffset.x = max(0, imageOffset.x)
         imageOffset.y = max(0, imageOffset.y)
         
-        let topImageHeight = imageOffset.y
-        let topImage = CGImageCreateWithImageInRect(cgImage, CGRect(x: 0, y: 0, width: finalImageWidth, height: topImageHeight))
+        let topImageHeight = imageOffset.y / zoomScale
+        let topImage = CGImageCreateWithImageInRect(fullSrcImage, CGRect(x: 0, y: 0, width: finalImageWidth, height: topImageHeight))
         
-        let topLeftOfBottomPart = CGPoint(x: 0, y: imageOffset.y + scrollView.bounds.size.height)
-        let bottomImageHeight = CGFloat(CGImageGetHeight(cgImage)) - topLeftOfBottomPart.y
+        let bottomImageStartY = (imageOffset.y + scrollView.bounds.size.height) / zoomScale
+        let bottomImageHeight = (CGFloat(CGImageGetHeight(fullSrcImage)) - bottomImageStartY)
         let sizeOfBottomPart = CGSize(width: finalImageWidth, height: bottomImageHeight)
         
-        let bottomImage = CGImageCreateWithImageInRect(cgImage, CGRect(origin: topLeftOfBottomPart, size: sizeOfBottomPart))
+        print("topImageHeight:\(topImageHeight), bottomImageHeight:\(bottomImageHeight)")
+        
+        let bottomImage = CGImageCreateWithImageInRect(fullSrcImage, CGRect(origin: CGPoint(x: 0, y: bottomImageStartY), size: sizeOfBottomPart))
         
         let finalSize = CGSize(width: finalImageWidth, height: topImageHeight + bottomImageHeight)
+        
         
         UIGraphicsBeginImageContext(finalSize)
         
@@ -79,7 +84,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
 
     func scrollViewDidScroll(scrollView: UIScrollView)
     {
-        dispatch_async(bgQueue!, { self.drawTop(scrollView.contentOffset) })
+        dispatch_async(bgQueue!, { self.drawTop(scrollView.contentOffset, zoomScale: scrollView.zoomScale) })
     }
 }
 
