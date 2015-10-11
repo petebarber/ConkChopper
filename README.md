@@ -3,4 +3,4 @@ Experimenting with image manipulation. Allows a section of an image to be choppe
 
 Here’s a screenshot of the demo app:
 
-![alt text](https://github.com/petebarber/ConkChopper/blob/master/demo.png “Screenshot”)
+![alt text](https://github.com/petebarber/ConkChopper/raw/master/demo.png “Screenshot”)
