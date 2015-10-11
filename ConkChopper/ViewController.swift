@@ -25,7 +25,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
         destImage.layer.borderWidth = 5.0
     }
     
-    func drawTop(var imageOffset: CGPoint, zoomScale: CGFloat)
+    func chop(var imageOffset: CGPoint, zoomScale: CGFloat)
     {
         print("scale:\(zoomScale), offset:\(imageOffset)")
         
@@ -84,7 +84,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
 
     func scrollViewDidScroll(scrollView: UIScrollView)
     {
-        dispatch_async(bgQueue!, { self.drawTop(scrollView.contentOffset, zoomScale: scrollView.zoomScale) })
+        dispatch_async(bgQueue!, { self.chop(scrollView.contentOffset, zoomScale: scrollView.zoomScale) })
     }
 }
 
