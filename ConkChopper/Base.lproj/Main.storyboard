@@ -2,8 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,22 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bg1-ey-cY0">
-                                <rect key="frame" x="20" y="285" width="103" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Chop the Conk"/>
-                                <connections>
-                                    <action selector="chop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JEt-bI-rvE"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4P-NH-N2F">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yaX-HN-ZZJ"/>
-                                </connections>
-                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="atn-ax-tnO">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
@@ -44,20 +27,20 @@
                                 </subviews>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="cIo-4k-XDD" secondAttribute="trailing" id="0ck-rN-T7P"/>
-                                    <constraint firstItem="cIo-4k-XDD" firstAttribute="leading" secondItem="atn-ax-tnO" secondAttribute="leading" id="1tT-QU-OFQ"/>
-                                    <constraint firstItem="cIo-4k-XDD" firstAttribute="top" secondItem="atn-ax-tnO" secondAttribute="top" id="Id2-WL-yBM"/>
-                                    <constraint firstAttribute="bottom" secondItem="cIo-4k-XDD" secondAttribute="bottom" id="LkN-cZ-BOM"/>
+                                    <constraint firstItem="cIo-4k-XDD" firstAttribute="top" secondItem="atn-ax-tnO" secondAttribute="top" id="3qU-AR-NrS"/>
+                                    <constraint firstItem="cIo-4k-XDD" firstAttribute="leading" secondItem="atn-ax-tnO" secondAttribute="leading" id="7dT-EB-IbT"/>
+                                    <constraint firstAttribute="trailing" secondItem="cIo-4k-XDD" secondAttribute="trailing" id="OUb-DN-EiL"/>
+                                    <constraint firstAttribute="bottom" secondItem="cIo-4k-XDD" secondAttribute="bottom" id="dQe-X2-sUH"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="cIo-4k-XDD"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="0ck-rN-T7P"/>
-                                        <exclude reference="1tT-QU-OFQ"/>
-                                        <exclude reference="Id2-WL-yBM"/>
-                                        <exclude reference="LkN-cZ-BOM"/>
+                                        <exclude reference="3qU-AR-NrS"/>
+                                        <exclude reference="7dT-EB-IbT"/>
+                                        <exclude reference="OUb-DN-EiL"/>
+                                        <exclude reference="dQe-X2-sUH"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -65,10 +48,10 @@
                                         <include reference="cIo-4k-XDD"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="0ck-rN-T7P"/>
-                                        <include reference="1tT-QU-OFQ"/>
-                                        <include reference="Id2-WL-yBM"/>
-                                        <include reference="LkN-cZ-BOM"/>
+                                        <include reference="3qU-AR-NrS"/>
+                                        <include reference="7dT-EB-IbT"/>
+                                        <include reference="OUb-DN-EiL"/>
+                                        <include reference="dQe-X2-sUH"/>
                                     </mask>
                                 </variation>
                             </scrollView>
@@ -81,57 +64,52 @@
                         <animations/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bg1-ey-cY0" firstAttribute="leading" secondItem="WdH-Xt-Y1v" secondAttribute="leading" id="G9b-05-oeR"/>
-                            <constraint firstItem="H4P-NH-N2F" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="IOU-ft-zp7"/>
-                            <constraint firstItem="WdH-Xt-Y1v" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Njy-se-urp"/>
-                            <constraint firstItem="bg1-ey-cY0" firstAttribute="top" secondItem="atn-ax-tnO" secondAttribute="bottom" id="RZF-GM-VDI"/>
-                            <constraint firstItem="bg1-ey-cY0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="a0y-PX-Uc5"/>
-                            <constraint firstItem="WdH-Xt-Y1v" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="b4j-eJ-yf8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="atn-ax-tnO" secondAttribute="trailing" id="bEu-2N-NE3"/>
-                            <constraint firstItem="atn-ax-tnO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hj2-hr-vnz"/>
-                            <constraint firstItem="WdH-Xt-Y1v" firstAttribute="top" secondItem="bg1-ey-cY0" secondAttribute="bottom" id="jc4-PZ-xyF"/>
-                            <constraint firstItem="H4P-NH-N2F" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="kmb-s3-bPU"/>
-                            <constraint firstItem="bg1-ey-cY0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="tas-x5-KQT"/>
-                            <constraint firstItem="atn-ax-tnO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="xBW-6d-Rcw"/>
+                            <constraint firstItem="WdH-Xt-Y1v" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="0Hb-CU-pxR"/>
+                            <constraint firstItem="cIo-4k-XDD" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="1ke-Wo-GxF"/>
+                            <constraint firstItem="atn-ax-tnO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="CRK-Od-3la"/>
+                            <constraint firstItem="atn-ax-tnO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="OM9-5u-Xk6"/>
+                            <constraint firstItem="WdH-Xt-Y1v" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="QiT-uC-DJJ"/>
+                            <constraint firstItem="WdH-Xt-Y1v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xz3-0o-GVz"/>
+                            <constraint firstItem="cIo-4k-XDD" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="fcc-FO-YcC"/>
+                            <constraint firstAttribute="trailing" secondItem="atn-ax-tnO" secondAttribute="trailing" id="jLK-OZ-m4q"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="WdH-Xt-Y1v" secondAttribute="bottom" id="kEX-8K-7Wx"/>
+                            <constraint firstItem="cIo-4k-XDD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sty-LS-KDv"/>
+                            <constraint firstItem="WdH-Xt-Y1v" firstAttribute="top" secondItem="atn-ax-tnO" secondAttribute="bottom" id="wFm-8q-p3T"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="H4P-NH-N2F"/>
                                 <exclude reference="atn-ax-tnO"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="bEu-2N-NE3"/>
-                                <exclude reference="hj2-hr-vnz"/>
-                                <exclude reference="xBW-6d-Rcw"/>
-                                <exclude reference="G9b-05-oeR"/>
-                                <exclude reference="RZF-GM-VDI"/>
-                                <exclude reference="a0y-PX-Uc5"/>
-                                <exclude reference="tas-x5-KQT"/>
-                                <exclude reference="Njy-se-urp"/>
-                                <exclude reference="b4j-eJ-yf8"/>
-                                <exclude reference="jc4-PZ-xyF"/>
-                                <exclude reference="IOU-ft-zp7"/>
-                                <exclude reference="kmb-s3-bPU"/>
+                                <exclude reference="CRK-Od-3la"/>
+                                <exclude reference="OM9-5u-Xk6"/>
+                                <exclude reference="jLK-OZ-m4q"/>
+                                <exclude reference="1ke-Wo-GxF"/>
+                                <exclude reference="fcc-FO-YcC"/>
+                                <exclude reference="sty-LS-KDv"/>
+                                <exclude reference="0Hb-CU-pxR"/>
+                                <exclude reference="QiT-uC-DJJ"/>
+                                <exclude reference="Xz3-0o-GVz"/>
+                                <exclude reference="wFm-8q-p3T"/>
+                                <exclude reference="kEX-8K-7Wx"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="H4P-NH-N2F"/>
                                 <include reference="atn-ax-tnO"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="bEu-2N-NE3"/>
-                                <include reference="hj2-hr-vnz"/>
-                                <include reference="xBW-6d-Rcw"/>
-                                <include reference="G9b-05-oeR"/>
-                                <include reference="RZF-GM-VDI"/>
-                                <include reference="a0y-PX-Uc5"/>
-                                <include reference="tas-x5-KQT"/>
-                                <include reference="Njy-se-urp"/>
-                                <include reference="b4j-eJ-yf8"/>
-                                <include reference="jc4-PZ-xyF"/>
-                                <include reference="IOU-ft-zp7"/>
-                                <include reference="kmb-s3-bPU"/>
+                                <include reference="CRK-Od-3la"/>
+                                <include reference="OM9-5u-Xk6"/>
+                                <include reference="jLK-OZ-m4q"/>
+                                <include reference="1ke-Wo-GxF"/>
+                                <include reference="fcc-FO-YcC"/>
+                                <include reference="sty-LS-KDv"/>
+                                <include reference="0Hb-CU-pxR"/>
+                                <include reference="QiT-uC-DJJ"/>
+                                <include reference="Xz3-0o-GVz"/>
+                                <include reference="wFm-8q-p3T"/>
+                                <include reference="kEX-8K-7Wx"/>
                             </mask>
                         </variation>
                     </view>
